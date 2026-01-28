@@ -26,12 +26,12 @@ public:
         } 
         temp->next = nullptr;
 
-        ListNode* lastNode = slow;
-        while(lastNode){
-            ListNode* nxt = lastNode->next;
-            delete lastNode;
-            lastNode = nxt;
-        }
+        // ListNode* lastNode = slow;
+        // while(lastNode){
+        //     ListNode* nxt = lastNode->next;
+        //     delete lastNode;
+        //     lastNode = nxt;
+        // }
         return head;
     }
 };
