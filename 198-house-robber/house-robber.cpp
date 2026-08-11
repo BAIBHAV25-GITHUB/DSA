@@ -1,21 +1,16 @@
 class Solution {
 public:
-    int t[101]; 
-    int maxAmount(vector<int>& nums, int index){
-        if (index >= nums.size()){
-            return 0;
-        }
-
-        if(t[index] != -1) return t[index];
-
-        int amount1=nums[index]+maxAmount(nums, index+2);
-        int amount2=maxAmount(nums,index+1);
-
-        return t[index] = max(amount1, amount2);
-
-    } 
     int rob(vector<int>& nums) {
-        memset(t, -1, sizeof(t));
-        return maxAmount(nums, 0);
+        int n = nums.size();
+
+        if(n == 1) return nums[0];
+        
+        vector<int> dp(n, -1);
+        dp[0] = nums[0];
+        dp[1] = max(nums[0], nums[1]);
+        for(int i=2; i<n; i++){
+            dp[i] = max(dp[i-1], dp[i-2]+nums[i]);
+        }
+        return dp[n-1];
     }
 };
