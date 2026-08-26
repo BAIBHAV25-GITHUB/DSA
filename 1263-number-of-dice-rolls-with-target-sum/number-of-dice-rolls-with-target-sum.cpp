@@ -53,7 +53,7 @@ public:
             }
             prev = curr;
         }
-        return prev[target];
+        return curr[target];
     }
 
     int numRollsToTarget(int n, int k, int target) {
