@@ -1,1 +1,1 @@
-<h2>number-of-dice-rolls-with-target-sum Notes</h2><hr>[ Time taken: 10m 39s ]
+<h2>number-of-dice-rolls-with-target-sum Notes</h2><hr>[ Time taken: 22m 5s ]
