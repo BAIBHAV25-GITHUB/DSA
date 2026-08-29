@@ -20,33 +20,50 @@ public:
 
     //     if(dp[index][target] != -1) return dp[index][target];
 
-        // bool include = solveUsingMem(nums, target-nums[index], index+1, n, dp);
-        // bool exclude = solveUsingMem(nums, target, index+1, n, dp);
+    //     bool include = solveUsingMem(nums, target-nums[index], index+1, n, dp);
+    //     bool exclude = solveUsingMem(nums, target, index+1, n, dp);
 
-        // dp[index][target] = (include || exclude);
-        // return dp[index][target];
+    //     dp[index][target] = (include || exclude);
+    //     return dp[index][target];
     // }
 
-    bool solveUsingTab(vector<int>& nums, int target){
-        int n=nums.size();
-        vector<vector<int>> dp(n+1, vector<int>(target+1, 0));
+    // bool solveUsingTab(vector<int>& nums, int target){
+    //     int n=nums.size();
+    //     vector<vector<int>> dp(n+1, vector<int>(target+1, 0));
 
+
+    //     for(int i=0; i<n; i++){
+    //         dp[i][0]= 1;
+    //     }
+
+    //     for(int i=n-1; i>=0; i--){
+    //         for(int t=1; t<=target; t++){
+    //             bool include = 0;
+    //             if(t-nums[i] >= 0) include = dp[i+1][t-nums[i]];
+    //             bool exclude = dp[i+1][t];
+
+    //             dp[i][t] = (include || exclude);
+    //         }
+    //     }
+
+    //     return dp[0][target];
+    // }
+
+    bool solve(vector<int>& nums, int target){
+        int n=nums.size();
+        vector<int> dp(target+1, 0);
+        dp[0] =1;
+        
 
         for(int i=0; i<n; i++){
-            dp[i][0]= 1;
-        }
+            for(int t=target; t>=nums[i]; t--){
+                int include = dp[t-nums[i]];
+                int exclude = dp[t];
 
-        for(int i=n-1; i>=0; i--){
-            for(int t=1; t<=target; t++){
-                bool include = 0;
-                if(t-nums[i] >= 0) include = dp[i+1][t-nums[i]];
-                bool exclude = dp[i+1][t];
-
-                dp[i][t] = (include || exclude);
+                dp[t] = include || exclude;
             }
         }
-
-        return dp[0][target];
+        return dp[target];
     }
 
     bool canPartition(vector<int>& nums) {
@@ -61,6 +78,7 @@ public:
         // vector<vector<int>> dp(n, vector<int>(target+1, -1));
         // return solveUsingMem(nums, target, 0, n, dp);
 
-        return solveUsingTab(nums, target);
+        // return solveUsingTab(nums, target);
+        return solve(nums, target);
     }
 };
