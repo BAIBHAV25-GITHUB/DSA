@@ -1,0 +1,38 @@
+class Solution {
+public:
+    // int solveUsingRec(string a, string b, int i, int j){
+    //     if(i == a.length()) return 0;
+    //     if(j == b.length()) return 0;
+
+    //     int ans = 0;
+    //     if(a[i] == b[j]) ans = 1+solveUsingRec(a, b, i+1, j+1);
+    //     else ans = max(solveUsingRec(a, b, i+1, j), solveUsingRec(a, b, i, j+1));
+
+    //     return ans;
+    // }
+
+    int solveUsingMem(string& a, string& b, int i, int j, vector<vector<int>>& dp){
+        if(i == a.length()) return 0;
+        if(j == b.length()) return 0;
+
+        if(dp[i][j] != -1) return dp[i][j];
+
+        int ans = 0;
+        if(a[i] == b[j]){
+            ans = 1+solveUsingMem(a, b, i+1, j+1, dp);
+        }
+        else{
+            ans = max(solveUsingMem(a, b, i+1, j, dp), solveUsingMem(a, b, i, j+1, dp));
+        } 
+
+        return dp[i][j]=ans;
+    }
+
+    int longestCommonSubsequence(string text1, string text2) {
+        // return solveUsingRec(text1, text2, 0, 0);
+
+        int n = text1.length(), m = text2.length();
+        vector<vector<int>> dp(n, vector<int>(m, -1));
+        return solveUsingMem(text1, text2, 0, 0, dp);
+    }
+};
